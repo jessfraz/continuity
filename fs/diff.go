@@ -92,7 +92,7 @@ func Changes(ctx context.Context, a, b string, changeFn ChangeFunc) error {
 	}
 
 	logrus.Debugf("Using double walk diff for %s from %s", b, a)
-	return doubleWalkDiff(ctx, changeFn, a, b)
+	return DoubleWalkDiff(ctx, changeFn, a, b)
 }
 
 func addDirChanges(ctx context.Context, changeFn ChangeFunc, root string) error {
@@ -214,8 +214,8 @@ func diffDirChanges(ctx context.Context, changeFn ChangeFunc, base string, o *di
 	})
 }
 
-// doubleWalkDiff walks both directories to create a diff
-func doubleWalkDiff(ctx context.Context, changeFn ChangeFunc, a, b string) (err error) {
+// DoubleWalkDiff walks both directories to create a diff
+func DoubleWalkDiff(ctx context.Context, changeFn ChangeFunc, a, b string) (err error) {
 	g, ctx := errgroup.WithContext(ctx)
 
 	var (
